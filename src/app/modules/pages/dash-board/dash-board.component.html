@@ -1,13 +1,13 @@
 <section class="content-header">
   <h1>
-    Blank page
-    <small>it all starts here</small>
+    Produtos
+    <small>## COLOCAR MSG!</small>
   </h1>
-  <ol class="breadcrumb">
+  <!--<ol class="breadcrumb">
     <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
     <li><a href="#">Examples</a></li>
-    <li class="active">Blank page</li>
-  </ol>
+    <li class="active">Produtos</li>
+  </ol> -->
 </section>
 
 <!-- Main content -->
@@ -16,7 +16,7 @@
   <!-- Default box -->
   <div class="box">
     <div class="box-header with-border">
-      <h3 class="box-title">Title</h3>
+      <h3 class="box-title">Por favor escolha a fruta desejada:</h3>
 
       <div class="box-tools pull-right">
         <button class="btn btn-box-tool" data-toggle="tooltip" data-widget="collapse" title="Collapse"
@@ -27,11 +27,52 @@
       </div>
     </div>
     <div class="box-body">
-      Start creating your amazing application!
+      <div class="row" style="margin-left: 20px; margin-top: 20px;">
+          <div class="col-lg-2 col-xs-3">
+            <!-- small box -->
+            <div class="small-box bg-red">
+              <div class="inner">
+                <h3>Maçã</h3>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-2 col-xs-3">
+            <!-- small box -->
+            <div class="small-box bg-green">
+              <div class="inner">
+                <h3>Pera</h3>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-2 col-xs-3">
+            <!-- small box -->
+            <div class="small-box bg-purple">
+              <div class="inner">
+                <h3>Uva</h3>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-2 col-xs-3">
+            <!-- small box -->
+            <div class="small-box bg-yellow">
+              <div class="inner">
+                <h3>Melão</h3>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-2 col-xs-3">
+            <!-- small box -->
+            <div class="small-box bg-black">
+              <div class="inner">
+                <h3>Todas</h3>
+              </div>
+            </div>
+          </div>
+      </div>
     </div>
     <!-- /.box-body -->
     <div class="box-footer">
-      Footer
+      Lembre-se de olhar atentamente as informações antes de fechar o pedido!
     </div>
     <!-- /.box-footer-->
   </div>
@@ -39,3 +80,67 @@
 
 </section>
 <!-- /.content -->
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">Nome</th>
+      <th scope="col">Peso</th>
+      <th scope="col">Valor</th>
+      <th scope="col">Ações</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let produto of produtos">
+      <td>{{produto.nome_produto}}</td>
+      <td>{{produto.peso_produto}} g</td>
+      <td>R$ {{produto.valor_produto}}</td>
+      <td>
+        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal" (click)="loadProduto(produto.id)" >Comprar</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+
+<!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Comprar Produto</h4>
+      </div>
+      <div class="modal-body" *ngIf="produto">
+            
+          <p style="font-size: 25px;">Produto:</p>
+          <div class="row" style="margin-left: 20px;">
+            <img [src]="produto.imagem_produto" height="100px" width="100px"> <br>
+
+            <div class="">
+              <label>Nome Produto:</label> {{produto.nome_produto}} <br>
+              <label>Descricao:</label> {{produto.descricao}} <br>
+              <label>Valor:</label> {{produto.valor_produto}} <br>
+              <label>Peso:</label> {{produto.peso_produto}} <br>
+            </div>
+          </div>
+
+          <p style="font-size: 25px;">Vendedor:</p>
+          <div class="row" style="margin-left: 20px;">
+            <img [src]="produto.vendedor.imagem_logo" height="100px" width="200px">
+ 
+            <div class="">
+              <label>Nome Vendedor:</label> {{produto.vendedor.nome_vendedor}}
+            </div>
+          </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success" data-dismiss="modal">Comprar</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
