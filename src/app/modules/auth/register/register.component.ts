@@ -1,4 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
+import { TokenPayload, AuthenticationService } from 'src/app/services/Authentication.service';
+import { Router } from '@angular/router';
 
 declare var $;
 
@@ -8,8 +10,14 @@ declare var $;
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent implements OnInit, OnDestroy {
+  credentials: TokenPayload = {
+    id: 0,
+    name: '',
+    email: '',
+    password: ''
+  }
 
-  constructor() {
+  constructor(private auth: AuthenticationService, private router: Router) {
   }
 
   ngOnInit() {
@@ -25,6 +33,17 @@ export class RegisterComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     $('body').removeClass('hold-transition login-page');
+  }
+
+  register() {
+    this.auth.register(this.credentials).subscribe(
+      () => {
+        this.router.navigateByUrl('/');
+      },
+      err => {
+        console.log(err);
+      }
+    )
   }
 
 }

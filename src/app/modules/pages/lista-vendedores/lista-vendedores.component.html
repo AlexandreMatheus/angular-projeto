@@ -1,0 +1,91 @@
+<button type="button" class="btn btn-success" data-toggle="modal" data-target="#cadastrarVendedor" >Cadastrar Vendedor</button>
+
+<table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Nome</th>
+        <th scope="col">Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let vendedor of vendedores">
+        <td>{{vendedor.nome_vendedor}}</td>
+
+        <td>
+          <button type="button" class="btn btn-success" data-toggle="modal" (click)="loadVendedor(vendedor.id)" data-target="#verVendedor" >ver</button>
+          <button type="button" class="btn btn-danger" style="margin-left: 20px;" (click)="deletarVendedor(vendedor.id)" >Deletar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+
+
+
+  <!-- Modal -->
+<div id="cadastrarVendedor" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+  
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Cadastrar Vendedor</h4>
+        </div>
+        <div class="modal-body">
+          <form (submit)="cadastrarVendedor()">
+            <div class="form-group has-feedback">
+              <span>Nome Vendedor:</span>
+              <input class="form-control" placeholder="Nome Vendedor" name="nome" type="text" [(ngModel)]="credentialsVendedor.nome_vendedor">
+            </div>
+            <div class="form-group has-feedback">
+              <span>Imagem Vendedor:</span>
+              <input class="form-control" placeholder="Imagem Vendedor" name="imagem" [(ngModel)]="credentialsVendedor.imagem_logo" type="text">
+            </div>
+            <div class="form-group has-feedback">
+                <span>Endereco Vendedor:</span>
+                <input class="form-control" placeholder="Endereco Vendedor" name="endereco" [(ngModel)]="credentialsVendedor.endereco" type="text">
+              </div>
+            <div class="col-xs-4">
+                <button class="btn btn-primary btn-block btn-flat">Enviar</button>
+              </div>
+          </form>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+    <!-- Modal -->
+<div id="verVendedor" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Ver Vendedor</h4>
+      </div>
+      <div class="modal-body" *ngIf="vendedor">
+          <div class="form-group has-feedback">
+            <span>Nome Vendedor:</span>
+            <input class="form-control" placeholder="Nome Vendedor" name="nome" type="text" disabled="disabled" [(ngModel)]="vendedor.nome_vendedor">
+          </div>
+          <div class="form-group has-feedback">
+            <span>Imagem Vendedor:</span><br>
+            <img [src]="vendedor.imagem_logo" height="100px" width="200px">
+          </div>
+          <div class="form-group has-feedback">
+              <span>Endereco Vendedor:</span>
+              <input class="form-control" placeholder="Endereco Vendedor" name="endereco" disabled="disabled" [(ngModel)]="vendedor.endereco" type="text">
+            </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>

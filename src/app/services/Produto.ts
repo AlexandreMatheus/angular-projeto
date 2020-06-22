@@ -1,6 +1,7 @@
 import {Vendedor} from './Vendedor';
 
 export class Produto {
+    id: number;
     nome_produto: string;
     valor_produto: number;
     descricao: string;

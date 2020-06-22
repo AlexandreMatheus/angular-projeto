@@ -1,4 +1,8 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
+import { TokenPayload, AuthenticationService } from 'src/app/services/Authentication.service';
+import { Router } from '@angular/router';
+import { FormsModule }   from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 
 declare var $;
 
@@ -8,8 +12,15 @@ declare var $;
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit, OnDestroy {
+  credentials: TokenPayload = {
+    id: 0,
+    name: '',
+    email: '',
+    password: ''
+  }
 
-  constructor() {
+  reloader = false;
+  constructor(private auth: AuthenticationService, private router: Router) {
   }
 
   ngOnInit() {
@@ -27,4 +38,14 @@ export class LoginComponent implements OnInit, OnDestroy {
     $('body').removeClass('hold-transition login-page');
   }
 
+  login() {
+    this.auth.login(this.credentials).subscribe(
+      () => {
+        this.router.navigateByUrl('/');
+      },
+      err => {
+        console.log(err);
+      }
+    )
+  }
 }

@@ -5,7 +5,7 @@ import {FooterComponent} from './footer/footer.component';
 import {SideNavComponent} from './side-nav/side-nav.component';
 import {SettingsComponent} from './settings/settings.component';
 
-
+import { AuthenticationService } from '../../services/Authentication.service';
 @NgModule({
   declarations: [
     HeaderComponent,
@@ -20,6 +20,9 @@ import {SettingsComponent} from './settings/settings.component';
     FooterComponent,
     SideNavComponent,
     SettingsComponent
+  ],
+  providers: [
+    AuthenticationService
   ]
 })
 export class LayoutModule {

@@ -1,0 +1,15 @@
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">Produto</th>
+      <th scope="col">Valor</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let pedido of pedidos">
+      <td>{{pedido.nome_produto}}</td>
+      <td>{{pedido.valor_compra}}</td>
+    </tr>
+  </tbody>
+</table>

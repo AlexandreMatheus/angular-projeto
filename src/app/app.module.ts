@@ -6,7 +6,9 @@ import { AppComponent } from './app.component';
 import {LayoutModule} from './modules/layout/layout.module';
 import {OrderListModule} from 'primeng/orderlist';
 import { HttpClientModule } from '@angular/common/http';
-
+import { AuthenticationService } from './services/Authentication.service';
+import { FormsModule }   from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -14,12 +16,14 @@ import { HttpClientModule } from '@angular/common/http';
   ],
   imports: [
     BrowserModule,
+    FormsModule,
+    ReactiveFormsModule,
     AppRoutingModule,
     LayoutModule,
     OrderListModule,
-    HttpClientModule  
+    HttpClientModule,
   ],
-  providers: [],
+  providers: [AuthenticationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

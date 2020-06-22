@@ -80,7 +80,7 @@
 
 </section>
 <!-- /.content -->
-
+<button type="button" class="btn btn-success" *ngIf="userAdmin" data-toggle="modal" data-target="#cadastrarProduto" >Criar Produto</button>
 <table class="table table-striped">
   <thead>
     <tr>
@@ -137,7 +137,71 @@
           </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-success" data-dismiss="modal">Comprar</button>
+        <button type="button" class="btn btn-success"  *ngIf="auth.isLoggedIn(); else loggedOut" (click)="cadastrarPedido()" data-dismiss="modal">Comprar</button>
+        <ng-template #loggedOut>
+          <button _ngcontent-wyd-c6="" (click)="auth.redirect()" class="btn btn-success" type="button">Login / Cadastrar</button>
+        </ng-template>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- Modal -->
+<div id="cadastrarProduto" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Cadastrar Produto</h4>
+      </div>
+      <div class="modal-body">
+        <form (submit)="cadastrarProduto()">
+          <div class="form-group has-feedback">
+            <span>Nome Produto:</span>
+            <input class="form-control" placeholder="Nome Produto" name="nome" type="text" [(ngModel)]="credentialsProduto.nome_produto">
+          </div>
+          <div class="form-group has-feedback">
+            <span>Valor Produto:</span>
+            <input class="form-control" placeholder="Valor Produto" name="valor" [(ngModel)]="credentialsProduto.valor_produto" type="number">
+          </div>
+          <div class="form-group has-feedback">
+            <span>Descricao:</span>
+            <input class="form-control" placeholder="Descricao" name="descricao" [(ngModel)]="credentialsProduto.descricao" type="text">
+          </div>
+          <div class="form-group has-feedback">
+            <span>Imagem:</span>
+            <input class="form-control" placeholder="Imagem" name="imagem" [(ngModel)]="credentialsProduto.imagem_produto" type="text">
+          </div>
+          <div class="form-group has-feedback">
+            <span>Vendedor:</span> <br>
+            <select name="select"  [(ngModel)]="credentialsProduto.vendedor">
+              <option *ngFor="let vendedor of vendedores" [value]="vendedor.id" >
+                {{vendedor.nome_vendedor}}
+              </option>
+            </select>
+          </div>
+          <div class="form-group has-feedback">
+            <span>Peso:</span>
+            <input class="form-control" placeholder="Peso" name="peso" [(ngModel)]="credentialsProduto.peso_produto" type="text">
+          </div>
+          <div class="form-group has-feedback">
+            <span>Tipo Produto:</span> <br>
+            <select name="selectTipo"  [(ngModel)]="credentialsProduto.tipo_produto">
+              <option *ngFor="let tipo of tiposProdutos" [value]="tipo.id" >
+                {{tipo.nome_tipo}}
+              </option>
+            </select>
+          </div>
+          <div class="col-xs-4">
+            <button class="btn btn-primary btn-block btn-flat">Enviar</button>
+          </div>
+        </form>
+      <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       </div>
     </div>

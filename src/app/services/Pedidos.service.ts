@@ -1,42 +1,41 @@
 import { Injectable } from '@angular/core';
-import { Produto } from './Produto';
+import { Vendedor } from './Vendedor';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { catchError, tap, map } from 'rxjs/operators';
 import { Observable, of, throwError } from 'rxjs';
+import { Pedido } from './Pedido';
 
 @Injectable({
     providedIn: 'root'
   })
-export class ProdutoService {
-
-    produtos:Array<Produto> = [];
-    produto: Produto;
+export class PedidosService {
+    pedidos:Array<Pedido> = [];
+    pedido: Pedido;
 
     constructor(private http: HttpClient) { }
 
-    getProdutos(): Observable<Array<Produto>>
+    getPedidos(): Observable<Array<Pedido>>
     {
-        return this.http.get<Produto[]>('http://localhost:8000/api/produtos')
+        return this.http.get<Pedido[]>('http://localhost:8000/api/pedidos')
         .pipe(
-          tap(produtos => this.produtos = produtos),
-          catchError(this.handleError('getProdutos', []))
+          tap(pedidos => this.pedidos = pedidos),
+          catchError(this.handleError('getPedidos', []))
         );
     }
 
-    getProduto(id:number)
+    getVendedor(id:number)
     {
-        return this.http.get<Produto>('http://localhost:8000/api/produtos/' + id)
+        return this.http.get<Pedido>('http://localhost:8000/produtos/' + id)
         .pipe(
-          tap(produto => this.produto = produto),
+          tap(pedido => this.pedido = pedido),
           catchError(this.handleError('getProduto', []))
         );
     }
 
-    cadastrarProduto(produto) {
-      console.log(produto);
-      return this.http.post('http://localhost:8000/api/produtos', produto, {
+    cadastrarPedido(pedido) {
+      return this.http.post('http://localhost:8000/api/pedidos', pedido, {
         headers: {'Content-Type': 'application/json' }
-      });
+    })
     }
 
     private handleError<T> (operation = 'operation', result?: T) {
